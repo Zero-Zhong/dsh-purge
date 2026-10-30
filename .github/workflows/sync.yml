@@ -1,0 +1,14 @@
+name: Sync upstream
+on:
+  schedule:
+    - cron: "0 18 * * *"   # 每天新西兰时间早上 7 点（夏令时）
+  workflow_dispatch:        # 也可以手动触发
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh repo sync Zero-Zhong/dsh-purge -b master
+        env:
+          GH_TOKEN: ${{ github.token }}
